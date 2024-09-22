@@ -38,6 +38,7 @@
     * Assume packet number from 0 to 1000
     * Assume total packet sizes from 0 to 10000
     * src address and dst address should be range from 0.0.0.0 to 255.255.255.255 (IPv4)
+        * It's might be not so reasonable since the protocol I generated is range from 0 to 255, which means the ip address should not IPv4 only. However, for this test, we don't really use address for hashing. For easily generated, I just used only IPv4 here
     * src port and dst port should be from 0 to 65535
     * Protocol number is from 0 to 255, and protocol number from 146-252 will be seen as 'Unassigned'
     * Other infos should follow the sample log format reference https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
