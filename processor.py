@@ -131,8 +131,12 @@ def read_csv_file(filepath):
     with open(filepath, 'r') as file:
         return [line.strip().split(",") for line in file]
 
+# Generate an required output file
+def write_result_to_csv(trie):
+    assert trie is not None, "Trie is not built up successfully."
 
-def write_result_to_csv():
+    # Define the output CSV file path
+    output_csv_file = "tag_counts_and_port_protocol_combination_counts.csv"
     # Write to CSV file
     with open(output_csv_file, mode='w', newline='') as file:
         writer = csv.writer(file)
@@ -163,9 +167,9 @@ def write_result_to_csv():
             # Split the port and protocol based on the comma
             port, protocol = port_protocol.split(",")
             writer.writerow([port.strip(), protocol.strip(), count])
+    print(f"required counts have been successfully written to {output_csv_file}")
 
-
-if __name__ == '__main__':
+def main():
     trie = Trie()
     lookup_table_csv_file = "lookup_table_with_protocol_names.csv"
     flow_log_csv_file = "flow_log.csv"
@@ -190,7 +194,8 @@ if __name__ == '__main__':
             protocol = "Unassigned"
         trie.search_and_count(port, protocol.lower())
     
-    # Define the output CSV file path
-    output_csv_file = "tag_counts_and_port_protocol_combination_counts.csv"
-    write_result_to_csv()
-    print(f"required counts have been successfully written to {output_csv_file}")
+    # Write the result and generate the output file
+    write_result_to_csv(trie)
+
+if __name__ == '__main__':
+    main()
